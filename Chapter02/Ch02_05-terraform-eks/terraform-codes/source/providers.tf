@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.0"
+  required_version = ">=1.0"
 }
 
 provider "aws" {
@@ -7,5 +7,5 @@ provider "aws" {
 }
 
 data "aws_availability_zones" "available" {
-  exclude_names = ["ap-northeast-2a","ap-northeast-2c"]
+    exclude_names = ["ap-northeast-2a", "ap-northeast-2c"]
 }

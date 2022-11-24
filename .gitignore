@@ -1,0 +1,7 @@
+#Folder
+Chapter02\Ch02_05-terraform-eks\terraform-codes\source\.terraform
+
+#file
+Chapter02\Ch02_05-terraform-eks\terraform-codes\source\.terraform.lock.hcl
+Chapter02\Ch02_05-terraform-eks\terraform-codes\source\terraform.tfstate
+Chapter02\Ch02_05-terraform-eks\terraform-codes\source\terraform.tfstate.backup

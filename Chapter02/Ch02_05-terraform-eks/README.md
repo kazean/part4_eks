@@ -4,12 +4,12 @@
 - eks-cluster, eks-nodegroup.tf
 
 2. tf 명령어로 EKS 생성하기
-- (tf 디렉토리) terrafom init
+- (tf 디렉토리) terraform init
 - terraform plan
 - terraform apply
 - aws configure
 - aws eks update-kubeconfig --region <region> --name <cluster-name>
 - kubectl create -f .
 - kubectl get po [-A Opt, --all-namespaces]
-- terrafrom plan --destory
-- terraform destory
+- terrafrom plan --destroy
+- terraform destroy
