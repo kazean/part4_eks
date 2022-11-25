@@ -1,4 +1,4 @@
-resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-5ec253ea-b901-5380-a715-f213a9f93d73" {
+resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a" {
   availability_zones        = ["ap-northeast-2a", "ap-northeast-2c"]
   capacity_rebalance        = "true"
   default_cooldown          = "300"
@@ -23,8 +23,8 @@ resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-5ec253ea-b901-538
 
     launch_template {
       launch_template_specification {
-        launch_template_id   = "lt-0af0f330977f6748b"
-        launch_template_name = "eks-5ec253ea-b901-5380-a715-f213a9f93d73"
+        launch_template_id   = "lt-09f825dc7b3260829"
+        launch_template_name = "eks-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a"
         version              = "1"
       }
 
@@ -34,7 +34,7 @@ resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-5ec253ea-b901-538
     }
   }
 
-  name                    = "eks-test-eks-nodegroup-5ec253ea-b901-5380-a715-f213a9f93d73"
+  name                    = "eks-test-eks-nodegroup-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a"
   protect_from_scale_in   = "false"
   service_linked_role_arn = "arn:aws:iam::939823608919:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
 

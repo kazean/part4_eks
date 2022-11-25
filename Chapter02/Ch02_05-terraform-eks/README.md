@@ -1,6 +1,6 @@
 #Terrafom 으로 EKS 생성하기
 1. tf 파일 작성
-- variables.tf, providers.tf, security-group.tf, iam-rolese.tf
+- variables.tf, providers.tf, security-group.tf, iam-roles.tf
 - eks-cluster, eks-nodegroup.tf
 
 2. tf 명령어로 EKS 생성하기

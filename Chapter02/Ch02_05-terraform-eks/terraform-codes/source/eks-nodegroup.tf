@@ -21,4 +21,8 @@ resource "aws_eks_node_group" "test-eks-nodegroup" {
     aws_iam_role_policy_attachment.test-iam-policy-eks-nodegroup-cni,
     aws_iam_role_policy_attachment.test-iam-policy-eks-nodegroup-ecr
   ]
+
+  tags = {
+    "Name" = "${aws_eks_cluster.test-eks-cluster.name}-worker-node"
+  }
 }

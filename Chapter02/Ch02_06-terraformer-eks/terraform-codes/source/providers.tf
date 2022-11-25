@@ -1,13 +1,12 @@
 terraform {
   required_version = ">=1.0"
-
+  
   backend "s3" {
     bucket = "test-s3-tf-kazean-state"
     key = "terraform.tfstate"
     region = "ap-northeast-2"
     dynamodb_table = "test-ddb-tf-lock"
     encrypt = true
-
   }
 }
 

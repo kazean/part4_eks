@@ -53,4 +53,5 @@ resource "aws_eks_node_group" "test-eks-nodegroup2" {
   tags = {
     "Name" = "${aws_eks_cluster.test-eks-cluster.name}-worker-node2"
   }
+  
 }
