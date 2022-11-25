@@ -9,16 +9,18 @@
 >  콘솔내 s3, dynamodb 확인
 - s3 버킷에 기존 terrafrom.tfState 저장
 [Ch02_05 terraform.tfState] 
-aws s3 cp terraform.state s3://<S3 Backend Bucket명>/<저장할파일명>
+aws s3 cp terraform.tfstate s3://<S3 Backend Bucket명>/<저장할파일명>
+
 - [terraformer] init.tf
-terraformer import aws --regions=<리전명> --resources=<자원명ex)auto_scaling> --path-pattern=<추출한파일저장디렉토리명ex)auto_scaling>
+terraformer import aws --regions=<리전명> --resources=<자원명> --path-pattern=<추출한파일저장디렉토리명>
+>auto_scaling
 - s3 bucket에서 설정파일가져오기
 [download] aws s3 cp s3://<S3 Backend Bucket명>/<저장할파일명> .
 terraform state list
 - auto scaling, launch template import
 terraform state mv -state-out=<기존Terraform Backend 상태파일저장경로> <추출Terraform Object명> <Import되서저장될Terraform Object명>
 terraform state mv -state-out=<기존Terraform Backend 상태파일저장경로> <추출Terraform Object명> <Import되서저장될Terraform Object명>
-[Upload] aws s3 cp terraform.state s3://<S3 Backend Bucket명>/<저장할파일명> 
+[Upload] aws s3 cp terraform.tfstate s3://<S3 Backend Bucket명>/<저장할파일명> 
 
 3. 추출IaC코드를활용한2번째EKS NodeGroup생성및확인
 -[terraform-code] autoscaling_group, launch_template을 autoscaling에서 복사하여 가져옴
