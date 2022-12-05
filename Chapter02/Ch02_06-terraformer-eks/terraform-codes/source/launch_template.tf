@@ -16,9 +16,9 @@ resource "aws_launch_template" "init-eks-template" {
   disable_api_stop        = "false"
   disable_api_termination = "false"
 
-  iam_instance_profile {
-    name = "init-eks-template"
-  }
+  # iam_instance_profile {
+  #   name = "init-eks-template"
+  # }
 
   image_id      = "ami-014ca7719d6166f28"
   instance_type = "t3a.medium"

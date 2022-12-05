@@ -17,7 +17,7 @@ terraformer import aws --regions=<리전명> --resources=<자원명> --path-patt
 - s3 bucket에서 설정파일가져오기
 [download] aws s3 cp s3://<S3 Backend Bucket명>/<저장할파일명> .
 terraform state list
-- auto scaling, launch template import
+- auto_scaling, launch_template import
 terraform state mv -state-out=<기존Terraform Backend 상태파일저장경로> <추출Terraform Object명> <Import되서저장될Terraform Object명>
 [Upload] aws s3 cp terraform.tfstate s3://<S3 Backend Bucket명>/<저장할파일명> 
 

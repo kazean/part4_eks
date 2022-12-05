@@ -1,7 +1,8 @@
-resource "aws_autoscaling_group" "test-autoscaling-group" {
+resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-f4c270a4-58ba-79f7-f25a-1d78c7a8fe9d" {
   # availability_zones        = ["ap-northeast-2a", "ap-northeast-2c"]
   capacity_rebalance        = "true"
   default_cooldown          = "300"
+  default_instance_warmup   = "0"
   desired_capacity          = "1"
   force_delete              = "false"
   health_check_grace_period = "15"
@@ -22,8 +23,8 @@ resource "aws_autoscaling_group" "test-autoscaling-group" {
 
     launch_template {
       launch_template_specification {
-        launch_template_id   = "<launch_template_id>"
-        launch_template_name = "<launch_template_name>"
+        launch_template_id   = "lt-0b0d0ac79facf717b"
+        launch_template_name = "eks-f4c270a4-58ba-79f7-f25a-1d78c7a8fe9d"
         version              = "1"
       }
 
@@ -33,20 +34,14 @@ resource "aws_autoscaling_group" "test-autoscaling-group" {
     }
   }
 
-  name                    = "<name>"
+  name                    = "eks-test-eks-nodegroup-f4c270a4-58ba-79f7-f25a-1d78c7a8fe9d"
   protect_from_scale_in   = "false"
-  service_linked_role_arn = "<service_linked_role_arn>"
+  service_linked_role_arn = "arn:aws:iam::939823608919:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
 
   tag {
     key                 = "eks:cluster-name"
     propagate_at_launch = "true"
     value               = "test-eks-cluster"
-  }
-
-  tag {
-    key                 = "kubernetes.io/cluster/test-eks-cluster"
-    propagate_at_launch = "true"
-    value               = "owned"
   }
 
   tag {
@@ -56,18 +51,24 @@ resource "aws_autoscaling_group" "test-autoscaling-group" {
   }
 
   tag {
+    key                 = "k8s.io/cluster-autoscaler/enabled"
+    propagate_at_launch = "true"
+    value               = "true"
+  }
+
+  tag {
     key                 = "k8s.io/cluster-autoscaler/test-eks-cluster"
     propagate_at_launch = "true"
     value               = "owned"
   }
 
   tag {
-    key                 = "k8s.io/cluster-autoscaler/enabled"
+    key                 = "kubernetes.io/cluster/test-eks-cluster"
     propagate_at_launch = "true"
-    value               = "true"
+    value               = "owned"
   }
 
-  termination_policies      = ["AllocationStrategy", "OldestLaunchTemplate", "OldestInstance"]
-  vpc_zone_identifier       = ["<Subnet ID 1>", "<Subnet ID 2>"]
+  termination_policies      = ["AllocationStrategy", "OldestInstance", "OldestLaunchTemplate"]
+  vpc_zone_identifier       = ["subnet-0226b424a2644c9b2", "subnet-0cd145b0332902057"]
   wait_for_capacity_timeout = "10m"
 }

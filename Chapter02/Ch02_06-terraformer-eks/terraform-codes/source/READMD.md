@@ -15,3 +15,15 @@ Error: creating Auto Scaling Group (init-eks-autoscale-grp): ValidationError: Yo
 │   with aws_eks_node_group.test-eks-nodegroup2,
 │   on eks-nodegroup.tf line 30, in resource "aws_eks_node_group" "test-eks-nodegroup2":
 │   30: resource "aws_eks_node_group" "test-eks-nodegroup2" {
+
+
+Error: error waiting for EKS Node Group (test-eks-cluster:test-eks-nodegroup2) to create: unexpected state 'CREATE_FAILED', wanted target 'ACTIVE'. last error: 1 error occurred:
+│       * i-0d1b0991192173017: NodeCreationFailure: Instances failed to join the kubernetes cluster
+│ 
+│ 
+│ 
+│   with aws_eks_node_group.test-eks-nodegroup2,
+│   on eks-nodegroup.tf line 30, in resource "aws_eks_node_group" "test-eks-nodegroup2":
+│   30: resource "aws_eks_node_group" "test-eks-nodegroup2" {
+
+>> arn:aws:sts::939823608919:assumed-role/AWSServiceRoleForAmazonEKSNodegroup/EKS launch_template role 때문인것같음
