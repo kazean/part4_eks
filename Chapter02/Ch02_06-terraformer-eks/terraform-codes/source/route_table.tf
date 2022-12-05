@@ -1,24 +1,33 @@
-resource "aws_route_table" "tfer--rtb-01e5f139c1d7c0152" {
+# default route table
+# resource "aws_route_table" "tfer--rtb-01e5f139c1d7c0152" {
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     gateway_id = "igw-07147ad5c2b7e2d18"
+#   }
+
+#   tags = {
+#     Name = "default"
+#   }
+
+#   tags_all = {
+#     Name = "default"
+#   }
+
+#   vpc_id = "vpc-0f55c9e30ef5aef32"
+# }
+
+#tfer--rtb-091680a4075bd0937
+resource "aws_route_table" "public-subnet3-routing" {
+
+
+  depends_on = [
+    aws_vpc.default-vpc,
+    aws_internet_gateway.default-internet-gateway
+  ]
+
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "igw-07147ad5c2b7e2d18"
-  }
-
-  tags = {
-    Name = "default"
-  }
-
-  tags_all = {
-    Name = "default"
-  }
-
-  vpc_id = "vpc-0f55c9e30ef5aef32"
-}
-
-resource "aws_route_table" "tfer--rtb-091680a4075bd0937" {
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "igw-07147ad5c2b7e2d18"
+    gateway_id = aws_internet_gateway.default-internet-gateway.id
   }
 
   tags = {
@@ -29,13 +38,20 @@ resource "aws_route_table" "tfer--rtb-091680a4075bd0937" {
     Name = "public-subnet3-routing"
   }
 
-  vpc_id = "vpc-0f55c9e30ef5aef32"
+  vpc_id = aws_vpc.default-vpc.id
 }
 
-resource "aws_route_table" "tfer--rtb-0bee09895bb1b7848" {
+#tfer--rtb-0bee09895bb1b7848
+resource "aws_route_table" "public-subnet1-routing" {
+  
+  depends_on = [
+    aws_vpc.default-vpc,
+    aws_internet_gateway.default-internet-gateway
+  ]
+
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "igw-07147ad5c2b7e2d18"
+    gateway_id = aws_internet_gateway.default-internet-gateway.id
   }
 
   tags = {
@@ -46,5 +62,5 @@ resource "aws_route_table" "tfer--rtb-0bee09895bb1b7848" {
     Name = "public-subent1-routing"
   }
 
-  vpc_id = "vpc-0f55c9e30ef5aef32"
+  vpc_id = aws_vpc.default-vpc.id
 }

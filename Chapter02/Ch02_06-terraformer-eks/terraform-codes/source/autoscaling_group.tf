@@ -1,4 +1,12 @@
-resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a" {
+#tfer--eks-test-eks-nodegroup-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a
+resource "aws_autoscaling_group" "init-eks-autoscale-grp" {
+  depends_on = [
+    aws_launch_template.init-eks-template,
+    aws_subnet.public-subnet-1,
+    aws_subnet.public-subnet-3,
+    aws_iam_role_policy_attachment.test-iam-policy-eks-cluster
+  ]
+
   # availability_zones        = ["ap-northeast-2a", "ap-northeast-2c"]
   capacity_rebalance        = "true"
   default_cooldown          = "300"
@@ -23,8 +31,8 @@ resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-b2c256ae-7491-c37
 
     launch_template {
       launch_template_specification {
-        launch_template_id   = "lt-09f825dc7b3260829"
-        launch_template_name = "eks-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a"
+        launch_template_id   = aws_launch_template.init-eks-template.id
+        launch_template_name = aws_launch_template.init-eks-template.name
         version              = "1"
       }
 
@@ -34,7 +42,7 @@ resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-b2c256ae-7491-c37
     }
   }
 
-  name                    = "eks-test-eks-nodegroup-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a"
+  name                    = "init-eks-autoscale-grp"
   protect_from_scale_in   = "false"
   service_linked_role_arn = "arn:aws:iam::939823608919:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
 
@@ -69,6 +77,6 @@ resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-b2c256ae-7491-c37
   }
 
   termination_policies      = ["AllocationStrategy", "OldestInstance", "OldestLaunchTemplate"]
-  vpc_zone_identifier       = ["subnet-0d390e6402fc78468", "subnet-0e81f58c442fcb870"]
+  vpc_zone_identifier       = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-3.id]
   wait_for_capacity_timeout = "10m"
 }

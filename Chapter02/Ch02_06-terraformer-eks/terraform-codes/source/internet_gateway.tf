@@ -1,3 +1,8 @@
-resource "aws_internet_gateway" "tfer--igw-07147ad5c2b7e2d18" {
-  vpc_id = "vpc-0f55c9e30ef5aef32"
+resource "aws_internet_gateway" "default-internet-gateway" {
+
+  depends_on = [
+    aws_vpc.default-vpc
+  ]
+
+  vpc_id = aws_vpc.default-vpc.id
 }

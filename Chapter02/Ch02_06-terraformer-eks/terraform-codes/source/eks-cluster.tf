@@ -11,8 +11,8 @@ resource "aws_eks_cluster" "test-eks-cluster" {
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
   vpc_config {
-    security_group_ids = [aws_security_group.test-sg-eks-cluster.id]
-    subnet_ids = ["subnet-0e81f58c442fcb870", "subnet-0d390e6402fc78468"]
+    security_group_ids  = [aws_security_group.test-sg-eks-cluster.id]
+    subnet_ids          = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-3.id]
     endpoint_public_access = true
   }
 }

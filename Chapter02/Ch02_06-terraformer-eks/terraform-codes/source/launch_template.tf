@@ -1,4 +1,5 @@
-resource "aws_launch_template" "tfer--eks-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a" {
+#tfer--eks-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a
+resource "aws_launch_template" "init-eks-template" {
   block_device_mappings {
     device_name = "/dev/xvda"
 
@@ -16,7 +17,7 @@ resource "aws_launch_template" "tfer--eks-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a" 
   disable_api_termination = "false"
 
   iam_instance_profile {
-    name = "eks-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a"
+    name = "init-eks-template"
   }
 
   image_id      = "ami-014ca7719d6166f28"
@@ -26,7 +27,7 @@ resource "aws_launch_template" "tfer--eks-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a" 
     http_put_response_hop_limit = "2"
   }
 
-  name = "eks-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a"
+  name = "init-eks-template"
 
   network_interfaces {
     device_index       = "0"
@@ -35,7 +36,7 @@ resource "aws_launch_template" "tfer--eks-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a" 
     ipv6_address_count = "0"
     ipv6_prefix_count  = "0"
     network_card_index = "0"
-    security_groups    = ["sg-0137ea15c050f65c4"]
+    security_groups    = [aws_security_group.test-sg-eks-cluster.id]
   }
 
   tags = {
@@ -89,7 +90,7 @@ resource "aws_launch_template" "test-launch-template-yeogunna" {
     ipv6_address_count = "0"
     ipv6_prefix_count  = "0"
     network_card_index = "0"
-    security_groups    = ["sg-0137ea15c050f65c4"]
+    security_groups    = [aws_security_group.test-sg-eks-cluster.id]
   }
 
   tags = {
