@@ -27,31 +27,31 @@ resource "aws_eks_node_group" "test-eks-nodegroup" {
   }
 }
 
-resource "aws_eks_node_group" "test-eks-nodegroup2" {
-  cluster_name = aws_eks_cluster.test-eks-cluster.name
-  node_group_name = "test-eks-nodegroup2"
-  node_role_arn = aws_iam_role.test-iam-role-eks-nodegroup.arn
-  subnet_ids = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-3.id]
-  # instance_types = ["t3a.medium"]
-  # disk_size = 20
+# resource "aws_eks_node_group" "test-eks-nodegroup2" {
+#   cluster_name = aws_eks_cluster.test-eks-cluster.name
+#   node_group_name = "test-eks-nodegroup2"
+#   node_role_arn = aws_iam_role.test-iam-role-eks-nodegroup.arn
+#   subnet_ids = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-3.id]
+#   # instance_types = ["t3a.medium"]
+#   # disk_size = 20
 
-  labels = {
-    "role" = "eks-nodegroup"
-  }
+#   labels = {
+#     "role" = "eks-nodegroup"
+#   }
 
-  scaling_config {
-    desired_size = 1
-    min_size = 1
-    max_size = 1
-  }
+#   scaling_config {
+#     desired_size = 1
+#     min_size = 1
+#     max_size = 1
+#   }
 
-  launch_template {
-    id      = aws_launch_template.test-launch-template-yeogunna.id
-    version = aws_launch_template.test-launch-template-yeogunna.latest_version
-  }
+#   launch_template {
+#     id      = aws_launch_template.test-launch-template-yeogunna.id
+#     version = aws_launch_template.test-launch-template-yeogunna.latest_version
+#   }
 
-  tags = {
-    "Name" = "${aws_eks_cluster.test-eks-cluster.name}-worker-node2"
-  }
+#   tags = {
+#     "Name" = "${aws_eks_cluster.test-eks-cluster.name}-worker-node2"
+#   }
   
-}
+# }

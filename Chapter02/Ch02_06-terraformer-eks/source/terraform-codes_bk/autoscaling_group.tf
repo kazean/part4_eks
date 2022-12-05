@@ -1,22 +1,14 @@
-#tfer--eks-test-eks-nodegroup-b2c256ae-7491-c372-b8e7-b4e8c4e0a77a
-resource "aws_autoscaling_group" "init-eks-autoscale-grp" {
-  depends_on = [
-    aws_launch_template.init-eks-template,
-    aws_subnet.public-subnet-1,
-    aws_subnet.public-subnet-3,
-    aws_iam_role_policy_attachment.test-iam-policy-eks-cluster
-  ]
-
-  # availability_zones        = ["ap-northeast-2a", "ap-northeast-2c"]
+resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-bec27103-5b2b-f47c-e752-8f89e6b0554f" {
+  availability_zones        = ["ap-northeast-2a", "ap-northeast-2c"]
   capacity_rebalance        = "true"
   default_cooldown          = "300"
   default_instance_warmup   = "0"
-  desired_capacity          = "2"
+  desired_capacity          = "1"
   force_delete              = "false"
   health_check_grace_period = "15"
   health_check_type         = "EC2"
   max_instance_lifetime     = "0"
-  max_size                  = "3"
+  max_size                  = "1"
   metrics_granularity       = "1Minute"
   min_size                  = "1"
 
@@ -31,8 +23,8 @@ resource "aws_autoscaling_group" "init-eks-autoscale-grp" {
 
     launch_template {
       launch_template_specification {
-        launch_template_id   = aws_launch_template.init-eks-template.id
-        launch_template_name = aws_launch_template.init-eks-template.name
+        launch_template_id   = "lt-0220c5b5e5f38da23"
+        launch_template_name = "eks-bec27103-5b2b-f47c-e752-8f89e6b0554f"
         version              = "1"
       }
 
@@ -42,7 +34,7 @@ resource "aws_autoscaling_group" "init-eks-autoscale-grp" {
     }
   }
 
-  name                    = "init-eks-autoscale-grp"
+  name                    = "eks-test-eks-nodegroup-bec27103-5b2b-f47c-e752-8f89e6b0554f"
   protect_from_scale_in   = "false"
   service_linked_role_arn = "arn:aws:iam::939823608919:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
 
@@ -77,6 +69,6 @@ resource "aws_autoscaling_group" "init-eks-autoscale-grp" {
   }
 
   termination_policies      = ["AllocationStrategy", "OldestInstance", "OldestLaunchTemplate"]
-  vpc_zone_identifier       = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-3.id]
+  vpc_zone_identifier       = ["subnet-06303e496dfe97710", "subnet-096e892185987765c"]
   wait_for_capacity_timeout = "10m"
 }

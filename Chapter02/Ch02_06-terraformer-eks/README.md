@@ -13,6 +13,7 @@
 aws s3 cp terraform.tfstate s3://<S3 Backend Bucket명>/<저장할파일명>
 - [terraformer] init.tf
 terraformer import aws --regions=<리전명> --resources=<자원명> --path-pattern=<추출한파일저장디렉토리명>
+terraformer import aws --regions=ap-northeast-2 --resources=auto_scaling --path-pattern=auto_scaling
 >auto_scaling
 - s3 bucket에서 설정파일가져오기
 [download] aws s3 cp s3://<S3 Backend Bucket명>/<저장할파일명> .
