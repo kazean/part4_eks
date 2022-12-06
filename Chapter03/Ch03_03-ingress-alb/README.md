@@ -14,6 +14,7 @@
 3. namespace, deployment, service 배포
 - kubectl, aws cli
 ssh -i (bastion)
+kubectl create -f test-deployment-game.yaml
 
 4. aws ALB Controller - #1
 - eksctl ALB Controller 설치
@@ -21,11 +22,21 @@ ssh -i (bastion)
 (iam-policy) 복사 > iam-policy.tf json 부분 대체
 terraform 
 kubernetes Service Account 를 Object를 쉽게 만들기 위한 eksctl
+
+eksctl utils associate-iam-oidc-provider --region=ap-northeast-2 --cluster=test-eks-cluster --approve
 eksctl create iamserviceaccount \
 --cluster=<EKS Cluster명> \
 --namespace=kube-system \
 --name=aws-load-balancer-controller \
 --attach-policy-arn=arn:aws:iam::<AWS 계정ID>:policy/AWSLoadBalancerControllerIAMPolicy \
+--override-existing-serviceaccounts \
+--approve
+
+eksctl create iamserviceaccount \
+--cluster=test-eks-cluster \
+--namespace=kube-system \
+--name=aws-load-balancer-controller \
+--attach-policy-arn=arn:aws:iam::939823608919:policy/test-alb-iam-policy \
 --override-existing-serviceaccounts \
 --approve
 
@@ -41,7 +52,9 @@ cert-manager 먼저 배포해야 alb controller 배포가능
 > kubectl get deploy -n kube-system aws-load-balancer-controller
 
 5. Ingress Annotation 설정 및 배포
-test-ingress.yaml
+kubectl create -f test-ingress.yaml
+kubectl get ing -n test-ingress-alb
+
 internet-facing or internal(private)
 target-type: ip (pod의 경우), instance (instance)
 subnets: alb가 어떤 subnet을 걸쳐서 트래픽 받을건지
