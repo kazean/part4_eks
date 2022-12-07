@@ -18,6 +18,8 @@ kubectl create -f test-deployment-game.yaml
 
 4. aws ALB Controller - #1
 - eksctl ALB Controller 설치
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
 - IAM Policy 설정
 (iam-policy) 복사 > iam-policy.tf json 부분 대체
 terraform 
