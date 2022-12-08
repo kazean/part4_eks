@@ -23,7 +23,7 @@ eksctl create iamserviceaccount \
 --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
 --approve \
 --role-only \
---role-name AmazonEKS_EBS_CSI_DriverRole
+--role-name Amazon_EKS_EBS_CSI_DriverRole
 > AWS POliCY에 해당하는 것을 kubernetes안에 권한있는 계정생성
 - cloud formation에서 수행된 결과값 확인 명령어
 
@@ -122,8 +122,8 @@ Events:
 # 
 4. 데이터/파일 쓰기 및 POD 삭제 후  볼륨 보존 확인
 - 4.1데이터/파일쓰기
- kubectl get ‒it <POD명> -n test-csi-block-pv -- echo "First data" >> /data/out.txt
- kubectl get ‒it <POD명> -n test-csi-block-pv -- echo "Second data" >> /data/out.txt
+ kubectl exec ‒it <POD명> -n test-csi-block-pv -- sh -c 'echo "First data" >> /data/out.txt'
+ kubectl exec ‒it <POD명> -n test-csi-block-pv -- sh -c 'echo "Second data" >> /data/out.txt'
 - 4.2 POD 삭제
  kubectl delete po <POD명> -n test-csi-block-pv
 - 4.3 볼륨보존확인
@@ -143,29 +143,38 @@ First및Second data존재확인
 # 추가내용
 1. Persistent Volume Mount 및 Volume Attach 검증 #1
 - POD에서 사용되는 PV는 EKS Worker Node기준으로 Volume을 Attach한 후, Node에 스케줄링 된 Pod에 Volume을 파일시스템에 Mount해서 사용하는 것이다.
+
 2. Persistent Volume Mount 및 Volume Attach 검증 #2
 - Pod, PVC, PV, Node현황 확인
+
 3. Persistent Volume Mount 및 Volume Attach 검증 #3
 - Pod에 Mount된 Volume 상세현황 확인
 kubectl get po -o yaml | grep -C5 vol
 kubectl describe po 
+
 5. Persistent Volume Mount 및 Volume Attach 검증 #5
 - PVC 상세내역 확인 (Workernode)
 kubectl describe pvc
+
 6. Persistent Volume Mount 및 Volume Attach 검증 #6
 - PV 상세내역 확인 (볼륨ID, EC2 EBS Volume 정보확인)
 kubectl describe pv
+
 7. Persistent Volume Mount 및 Volume Attach 검증 #7
 - EBS 볼륨 상세내역 확인 (6번과 비교)
+
 8. Persistent Volume Mount 및 Volume Attach 검증 #8
 -  EC2 VM 상세내역 확인 (5번 Workernode와 비교)
+
 9. Persistent Volume Mount 및 Volume Attach 검증 #9
 - (가설) POD를 Restart를 하면 다른 workernod에 할당될 것이다?
 kubectl rollout restart deploy 
 >> but, 동일한 노드로만 스케줄링 된다
+
 11. Persistent Volume Mount 및 Volume Attach 검증 #11
 - (가설) POD가 실행중이고 PV가 Attach된 Worker Node에 스케줄링을 막으면?
 kubectl cordon <Pod가 기동중이 node명>
+
 >> Pod pending > 다른 node로 scheduling 되지만, PV가 mount가 되지 않기에 정상기동이 되지 않는다
 14. Persistent Volume Mount 및 Volume Attach 검증 #14
 - cordon된 node를 다시 uncordon 한다면?
