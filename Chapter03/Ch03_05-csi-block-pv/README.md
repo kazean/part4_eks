@@ -24,15 +24,6 @@ eksctl create iamserviceaccount \
 --approve \
 --role-only \
 --role-name AmazonEKS_EBS_CSI_DriverRole
-
-eksctl create iamserviceaccount \
---name ebs-csi-controller-sa \
---namespace kube-system \
---cluster test-eks-cluster \
---attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
---approve \
---role-only \
---role-name Amazon_EKS_EBS_CSI_DriverRole
 > AWS POliCY에 해당하는 것을 kubernetes안에 권한있는 계정생성
 - cloud formation에서 수행된 결과값 확인 명령어
 
@@ -52,10 +43,8 @@ eksctl create iamserviceaccount \
 
 1-2. eksctl 애드온을 통한 설치
 eksctl create addon --name aws-ebs-csi-driver --cluster <EKS Cluster명> --service-account-role-arn arn:aws:iam::<AWS계정ID>:role/Amazon_EKS_EBS_CSI_DriverRole --force
-eksctl create addon --name aws-ebs-csi-driver --cluster test-eks-cluster --service-account-role-arn arn:aws:iam::939823608919:role/Amazon_EKS_EBS_CSI_DriverRole --force
 1-3. eksctl 애드온을 통한 설치상태 확인
 eksctl get addon --name aws-ebs-csi-driver --cluster <EKS Cluster명>
-eksctl get addon --name aws-ebs-csi-driver --cluster test-eks-cluster
 1-4. AWS EBS CSI Driver 설치 확인
 kubectl get pod -n kube-system | grep ebs-csi-controller
 
