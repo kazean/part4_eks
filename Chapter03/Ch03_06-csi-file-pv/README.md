@@ -8,7 +8,7 @@ curl -o iam-policy-example.json https://raw.githubusercontent.com/kubernetes-sig
 aws iam create-policy \
     --policy-name AmazonEKS_EFS_CSI_Driver_Policy \
     --policy-document file://iam-policy-example.json
-    
+# 권한 생성
 eksctl create iamserviceaccount \
 --name efs-csi-controller-sa \
 --namespace kube-system \
