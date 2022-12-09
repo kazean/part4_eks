@@ -33,15 +33,6 @@ eksctl create iamserviceaccount \
 --attach-policy-arn=arn:aws:iam::<AWS 계정ID>:policy/AWSLoadBalancerControllerIAMPolicy \
 --override-existing-serviceaccounts \
 --approve
-
-eksctl create iamserviceaccount \
---cluster=test-eks-cluster \
---namespace=kube-system \
---name=aws-load-balancer-controller \
---attach-policy-arn=arn:aws:iam::939823608919:policy/test-alb-iam-policy \
---override-existing-serviceaccounts \
---approve
-
 OIDC Provider 접근가능 권한 < > eks cluster aws alb 생선관리권한
 Service 계정 
 kubectl get sa -n kube-system (aws-load-balancer-controller)

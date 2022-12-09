@@ -16,7 +16,7 @@ eksctl create iamserviceaccount \
 curl -L https://git.io/get_helm.sh|bash -s -- --version v3.8.2
 helm version
 1-4. Helm 레포지토리 추가 (패키징이 특정 레포지토리에있음)
-helm repo add aws-efs-csi-driver https://kubernetes.sigs.github.io/aws-efs-csi-driver/
+helm repo add aws-efs-csi-driver https://kubernetes-sigs.github.io/aws-efs-csi-driver/
 1-5. Helm 레포지토리 업데이트
 helm repo update
 
@@ -53,8 +53,8 @@ kubectl describe pv
 4. 다른 워커노드에 있는 각 POD에서 Read,Write
 4-1. POD 상태확인
 4-2. 동시에 Read, Write
-kubectl exec -it <pod-1> -n test-csi-file-pv -- bash -c 'echo "[deploy-pod1-message]" >> dpod1/out; tail -10 /dpod1/out'
-kubectl exec -it <pod-2> -n test-csi-file-pv -- bash -c 'echo "[deploy-pod2-message]" >> dpod1/out; tail -10 /dpod2/out'
+kubectl exec -it deploy-pod1 -n test-csi-file-pv -- bash -c 'echo "[deploy-pod1-message]" >> dpod1/out; tail -10 /dpod1/out'
+kubectl exec -it deploy-pod2 -n test-csi-file-pv -- bash -c 'echo "[deploy-pod2-message]" >> dpod2/out; tail -10 /dpod2/out'
 
 5. 2개의 POD 삭제 및 2개의 파드 생성 후 동시 읽기 수행
 5-1. pod삭제
@@ -63,5 +63,5 @@ kubectl get pv
 AWS Console
 5-3. 파드 재생성
 5-4. 파일 동시 읽기 실행
-kubectl exec -it <pod-1> -n test-csi-file-pv -- cat /dpod1/out
-kubectl exec -it <pod-2> -n test-csi-file-pv -- cat /dpod2/out
+kubectl exec -it deploy-pod1 -n test-csi-file-pv -- cat /dpod1/out
+kubectl exec -it deploy-pod2 -n test-csi-file-pv -- cat /dpod2/out
