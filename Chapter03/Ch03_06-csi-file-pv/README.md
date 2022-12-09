@@ -3,6 +3,12 @@
 - READ, Write, Many (WorkerNode, POD)
 1. EFS CSI Driver 설치
 1-1. IAM Role 및 EKS내 서비스어카운트 생성(권한)
+# 정책생성
+curl -o iam-policy-example.json https://raw.githubusercontent.com/kubernetes-sigs/aws-efs-csi-driver/master/docs/iam-policy-example.json
+aws iam create-policy \
+    --policy-name AmazonEKS_EFS_CSI_Driver_Policy \
+    --policy-document file://iam-policy-example.json
+    
 eksctl create iamserviceaccount \
 --name efs-csi-controller-sa \
 --namespace kube-system \
