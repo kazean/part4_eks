@@ -6,13 +6,13 @@ metadata:
 spec:
   destination:
     namespace: guestbook
-    server: https://kubernetes.default.svc
-  project: default
-  source:
+    server: https://kubernetes.default.svc # kubernets cluster svc명
+  project: default # argocd Project
+  source: # git
     path: guestbook
     repoURL: git@github.com:<Github Profile명>/service-repository.git
     targetRevision: HEAD
-  syncPolicy:
+  syncPolicy: # 자동화된 gitops 관리
     automated:
       selfHeal: true
     syncOptions:
