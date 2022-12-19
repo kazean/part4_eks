@@ -13,4 +13,5 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 sudo mv /tmp/eksctl /usr/local/bin
 
 - Helm install
+brew install helm
 curl -L https://git.io/get_helm.sh|bash -s -- --version v3.8.2
