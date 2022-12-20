@@ -8,7 +8,10 @@
 2. ssh 관리를 위한 key 생성 및 Github 등록
 - 생성
 ssh-keygen -q -t rsa -N '' -m PEM -t rsa -b 4096 -C test -f ./id_rsa <<<y >/dev/null 2>&1
+>> ssh-keygen -t ed25519 -a 100 -f ./id_ed25519 <<<y >/dev/null 2>&1
 >> ssh-keygen -t ed25519 -C "argocd" -f argocd?
+>> ssh-keygen -t ed25519 -C "your_email@corp.com
+
 - 등록
 (MAC) OS
 ssh-add id_rsa
@@ -85,7 +88,7 @@ kubectl edit deploy guestbook-ui -n guestbook
 replicas: 1 > 3
 > replcas 변하지 않음
 # 3-3. gitOps 검증 
-- deployment Manifest를 변경해보기
+- deployment Manifest를 변경해보기 [commit/push]
 service-repository/guestbook/guestbook-ui-deploymet.yaml
 replicas 1 > 3
 > argoCD 자동변경 default 3min or Sync/Refresh
@@ -107,7 +110,7 @@ externalTrafficPolicy > delete
 > commit&Push > Refresh > Diff
 
 ### [실습 Ch05-06 Argo rollout 구성]
-# 1. Argo Rollout 및 플러그인 설치 스크립트경로
+1. Argo Rollout 및 플러그인 설치 스크립트경로
 - gitops-repository/management/argo-rollout/scripts/setup.sh
 chmod +x setup.sh && ./setup.sh
 - Argo Rollout Dashboard를 Background로 기동
@@ -125,7 +128,7 @@ cf,
 resources:
 - <management-repository>
 
-# 2. Argo Rollout Dashboard를 Background로 기동 
+2. Argo Rollout Dashboard를 Background로 기동 
 http://localhost:3100
 
 cf,
@@ -134,28 +137,32 @@ install.yaml
 kustomization.yaml
 
 ### [실습 Ch05-07 Argo Rollout을 활용한 무중단 배포]
-# 1. Canary 배포 설정 (yaml서정)
+1. Canary 배포 설정 (yaml서정)
 - service-repo/bubblepool/rollout.yaml
 kind: Rollout
 spec.strategy.canary.steps
     - setWeight: 20
     - pause: {duration: 15}
-# 2. Rollout Object 배포
-- gitops/service-repo/bubllepoll/application.yaml
+2. Rollout Object 배포
+- gitops/service-repo/bubblepool/application.yaml
 kind: Application
 - 배포
 kubectl apply -f application.yaml
-# 3. CLI GUI 확인
+3. CLI GUI 확인
 - GUI
 ArgoCD 
 - CLI
 kubectl get po -A
 kubectl get all -n bubblepool
-# 4. Bubble Pool Applicaiton 배포 확인
+4. Bubble Pool Applicaiton 배포 확인
 - CLI
-kubectl get application
+kubectl get application -A
 kubectl argo rollouts list rollout -n bubblepool
 kubectl argo rollouts status <NAME>
 kubectl argo rollouts get rollout <NAME> -n bubblepool [-w]
 - GUI 
 argo rollouts NLB:80
+
+5. Service Repo내 Bubble Pool 코드 업데이트 및 변경 배포 확인
+- rollout.yaml [commit push] 
+red > blue 
