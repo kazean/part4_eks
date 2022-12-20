@@ -8,10 +8,7 @@
 2. ssh 관리를 위한 key 생성 및 Github 등록
 - 생성
 ssh-keygen -q -t rsa -N '' -m PEM -t rsa -b 4096 -C test -f ./id_rsa <<<y >/dev/null 2>&1
->> ssh-keygen -t ed25519 -a 100 -f ./id_ed25519 <<<y >/dev/null 2>&1
->> ssh-keygen -t ed25519 -C "argocd" -f argocd?
->> ssh-keygen -t ed25519 -C "your_email@corp.com
-
+>> ssh-keygen -t ed25519 -a 100 -f ./id_ed25519  -C "argocd" <<<y >/dev/null 2>&1
 - 등록
 (MAC) OS
 ssh-add id_rsa
