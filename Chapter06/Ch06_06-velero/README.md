@@ -5,19 +5,20 @@
 
 # velero_policy.json
 - ec2, efs .... > s3에 저장
-- Resource: s3 test-velero-backup-bucket
+- Resource: s3 test-velero-backup-kazean-bucket
 
 2. velero설치
 # (2)aws iam policy 생성
-- aws iamcreate-policy --policy-name VeleroAccessPolicy --policydocument file://velero_policy.json 
+- aws iam create-policy --policy-name VeleroAccessPolicy --policy-document file://velero_policy.json
+>> velero_policy.json aws id settting
 # (3)aws iam role 생성
 - kubectl create namespace velero
-- eksctl create iamserviceaccount --cluster=<생성한EKS Cluster명> --name=velero-server --namespace=velero --role-name=eks-velerobackup --role-only --attach-policy-arn=arn:aws:iam::<AWS 계정ID(12자리수)>:policy/VeleroAccessPolicy --approve
+- eksctl create iamserviceaccount --cluster=<생성한EKS Cluster명> --name=velero-server --namespace=velero --role-name=eks-velero-backup --role-only --attach-policy-arn=arn:aws:iam::<AWS 계정ID(12자리수)>:policy/VeleroAccessPolicy --approve
 # (4)Helm Chart로 설치를 위한 values.yaml 내용 확인
 - initContainers(aws init container)
 # configuration
 - ~.provider: aws/azure,gcp
-- ~.backupStorageLocation.bucket: test-velero-backup-bucket
+- - ~.backupStorageLocation.bucket: test-velero-backup-kazean-bucket
 - ~.backupStorageLocation.config.region: ap-northeast-2
 - ~.volumeSnapshotLocation.name/config.region
 - ~.serviceAccount.server.name/annotations //ServiceAccount를 통해 통신하기에 credential은 설정 안해도된다.

@@ -26,4 +26,4 @@ Error: error waiting for EKS Node Group (test-eks-cluster:test-eks-nodegroup2) t
 │   on eks-nodegroup.tf line 30, in resource "aws_eks_node_group" "test-eks-nodegroup2":
 │   30: resource "aws_eks_node_group" "test-eks-nodegroup2" {
 
->> arn:aws:sts::939823608919:assumed-role/AWSServiceRoleForAmazonEKSNodegroup/EKS launch_template role 때문인것같음
+>> arn:aws:sts::<AWS_ID>:assumed-role/AWSServiceRoleForAmazonEKSNodegroup/EKS launch_template role 때문인것같음

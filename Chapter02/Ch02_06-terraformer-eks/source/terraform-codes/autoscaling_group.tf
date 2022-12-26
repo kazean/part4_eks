@@ -36,7 +36,7 @@ resource "aws_autoscaling_group" "tfer--eks-test-eks-nodegroup-bec27103-5b2b-f47
 
   name                    = "eks-test-eks-nodegroup-bec27103-5b2b-f47c-e752-8f89e6b0554f"
   protect_from_scale_in   = "false"
-  service_linked_role_arn = "arn:aws:iam::939823608919:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
+  service_linked_role_arn = "arn:aws:iam::<AWS_ID>:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
 
   tag {
     key                 = "eks:cluster-name"

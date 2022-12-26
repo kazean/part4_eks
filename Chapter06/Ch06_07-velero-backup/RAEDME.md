@@ -11,10 +11,17 @@
 # (2)백업 테스트앱 배포 후 도움말 중 추가 반영할 정보 확인
 - export APP_HOST=$(kubectl get svc --namespace ghost ghost --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}"); echo "APP_HOST="$APP_HOST
 - export GHOST_PW=$(kubectl get secret --namespace "ghost" ghost -o jsonpath="{.data.ghost-password}" | base64 --decode); echo "GHOST_PW="$GHOST_PW
-- export DB_ROOT_PW=$(kubectl get secret --namespace "ghost" ghost-mariadb -o jsonpath="{.data.mariadbroot-password}" | base64 --decode); echo "DB_ROOT_PW="$DB_ROOT_PW
-- export DB_PW=$(kubectl get secret --namespace "ghost" ghost-mariadb -o jsonpath="{.data.mariadbpassword}" | base64 --decode); echo "DB_PW="$DB_PW
+- export DB_ROOT_PW=$(kubectl get secret --namespace "ghost" ghost-mariadb -o jsonpath="{.data.mariadb-root-password}" | base64 --decode); echo "DB_ROOT_PW="$DB_ROOT_PW
+- export DB_PW=$(kubectl get secret --namespace "ghost" ghost-mariadb -o jsonpath="{.data.mariadb-password}" | base64 --decode); echo "DB_PW="$DB_PW
 # (3)백업 테스트앱 추가 반영정보 Upgrade
-- helm upgrade ghost ./ --namespace ghost --set service.type=LoadBalancer --set ghostHost=$APP_HOST --set ghostPassword=$GHOST_PW--set mariadb.auth.rootPassword=$DB_ROOT_PW --set mariadb.auth.password=$DB_PW
+- helm upgrade ghost ./ --namespace ghost --set service.type=LoadBalancer --set ghostHost=$APP_HOST --set ghostPassword=$GHOST_PW --set mariadb.auth.rootPassword=$DB_ROOT_PW --set mariadb.auth.password=$DB_PW
+
+helm upgrade --namespace ghost ghost ./ --set service.type=LoadBalancer --set ghostHost=$APP_HOST,ghostPassword=$GHOST_PW --set mariadb.auth.rootPassword=$DB_ROOT_PW --set mariadb.auth.password=$DB_PW
+
+helm upgrade --namespace ghost ghost ./ --set service.type=LoadBalancer --set ghostHost=$APP_HOST --set ghostPassword=$GHOST_PW --set mariadb.auth.rootPassword=$DB_ROOT_PW --set mariadb.auth.password=$DB_PW
+
+helm upgrade --namespace ghost ghost bitnami/ghost \
+    --set service.type=LoadBalancer,ghostHost=$APP_HOST,ghostPassword=$GHOST_PASSWORD,mariadb.auth.rootPassword=$MARIADB_ROOT_PASSWORD,mariadb.auth.password=$MARIADB_PASSWORD
 # (4)배포후 Kubernetes Object 현황 확인
 - kubectl get all -n ghost
 - kubectl get pv
