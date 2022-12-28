@@ -11,4 +11,4 @@
 - jsonOutput: false > true
 # falco direction
 - values.yaml
-- rules
+- rules 
