@@ -1,25 +1,26 @@
-### [Ch08-02 eksctl OIDC 생성]
+### Ch08-02 eksctl OIDC 생성
 1. IRSA용 OIDC 생성
 - eksctl utils associate-iam-oidc-provider --cluster <EKS클러스터명> --approve
 2. 생성된 IRSA OIDC URL 확인
 - aws eks describe-cluster --name <EKS클러스터명> --query "cluster.identity.oidc.issuer" --output text
 3. 생성된 IRSA OIDC ARN 확인
-- aws iamlist-open-id-connect-providers | grep <(2)번에서나온ID값입력>
+- aws iam list-open-id-connect-providers | grep <(2)번에서나온ID값입력>
 
 ### [Ch08-03 kube2am를 활용한 AWS IAM기반 권한 관리]
 1. 사전준비
 - eks: test-eks-cluster
-- s3: test-dev-k8s-s3-bucket >
+- s3: test-dev-k8s-s3-bucket > test-dev-k8s-s3-kazean-bucket
 > file upload
-- dymnamodb: test-dev-k8s-ddb-table 
+- dymnamodb: test-dev-k8s-ddb-table
 > key(String), index(String)
 - iam-policy.json
 > s3, dynamodb setting
 2. IAM Policy 적용
-- aws iamcreate-policy \
+- aws iam create-policy \
 --policy-name <생성할IAM Policy명> \ 
 --policy-document file://iam-policy.json
 > policy: test-iam-policy-s3-ddb
+
 3. IRSA 적용 (eksctl)
 - eksctl create iamserviceaccount \
 --name <IRSA명> \ 
@@ -28,7 +29,8 @@
 --attach-policy-arn arn:aws:iam::<AWS 12자리계정ID>:policy/<2번에서
 생성한접근할Resource의IAM Policy명> \
 --approve
-> IRSA: test-irsa-s3-ddb
+> IRSA: test-irsa-s3-ddb > test-irsa-kazean-s3-ddb
+> ns: default
 >> Role(OIDC Provider), 해당 Policy 적용
 4. IRSA 검증
 # 1. pod 배포

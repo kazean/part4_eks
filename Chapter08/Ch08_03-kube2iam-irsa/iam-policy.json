@@ -8,14 +8,14 @@
                 "dynamodb:List*",
                 "dynamodb:Describe*"
             ],
-            "Resource": "arn:aws:dynamodb:*:*:table/<DynamoDB 테이블명>"
+            "Resource": "arn:aws:dynamodb:*:*:table/test-dev-k8s-ddb-table"
         },
         {
             "Effect": "Allow",
             "Action": [
                 "s3:ListBucket"
             ],
-            "Resource": "arn:aws:s3:::<S3 Bucket명>"
+            "Resource": "arn:aws:s3:::test-dev-k8s-s3-kazean-bucket"
         },
         {
             "Sid": "List",
@@ -24,7 +24,7 @@
                 "s3:GetObject",
                 "s3:GetObjectVersion"
             ],
-            "Resource": "arn:aws:s3:::<S3 Bucket명>/*"
+            "Resource": "arn:aws:s3:::test-dev-k8s-s3-kazean-bucket/*"
         }
     ]
 }

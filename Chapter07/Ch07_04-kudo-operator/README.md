@@ -17,7 +17,7 @@
 - (확인) kubectl get po -n cert-manager
 # 5. kudo 설치 초기화 진행
 - (배포하기위한 상위 dir) kubectl kudo init
-- (확인) kubectl get po -n kube-system 
+- (확인) kubectl get po -n kudo-system 
 > kudo-controller-manager
 
 3. kudo를 사용한 Operator 생성

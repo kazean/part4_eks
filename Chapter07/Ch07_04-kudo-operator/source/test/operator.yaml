@@ -1,7 +1,7 @@
 apiVersion: kudo.dev/v1beta1
 name: "test"
-operatorVersion: "0.1.0"
-appVersion: "1.20"
+operatorVersion: "0.1.1"
+appVersion: "latest"
 kubernetesVersion: 1.21.0
 maintainers:
   - name: test

@@ -80,7 +80,7 @@ helm show all <chart dir>
 helm template <chart dir>
 - helm status nginx (NOTES.txt)
 {{- if .Values.ingress.enabled }}
-- deployment.yaml
+- deploymeunt.yaml
 _helpers.tpl ex) test.fullname
 - hpa.yaml
 values.yaml

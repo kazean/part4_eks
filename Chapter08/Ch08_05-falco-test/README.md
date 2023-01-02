@@ -1,4 +1,4 @@
-### Falco를 활용한 런타임 보안강화 with FluentBit & Cloudwatch
+### CH08-05 Falco를 활용한 런타임 보안강화 with FluentBit & Cloudwatch
 1. CloudWatch 로그 수집을 위한 FluentBit 설치
 # FluentBit Dir
 - configmap.yaml
@@ -23,11 +23,12 @@
 
 # 2. 보안 정책 위배(취약점) 명령어 수행
 - falco_rules.yaml
-- 1) "write below etc" > touch /etc/2
-- 2)"Read sensitive file untrusted" > cat /etc/shadow > /dev/null 2>&
-- 3)"Mkdir binary dirs" > cd /bin & mkdri hello
+- 1) "Write below etc" > touch /etc/2
+- 2)"Read sensitive file untrusted" > cat /etc/shadow > /dev/null 2>&1
+- 3)"Mkdir binary dirs" > cd /bin & mkdir hello
 
 4. CloudWatch Insights를 통한 쿼리 분석
+- Error File below, Warning Sensitive file opened, Error Directory below known binary directory
 - Logs Insight
 - falco
 - "Mkdri binary dirs" 로그 분석을 위한 쿼리 작성

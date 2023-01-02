@@ -4,7 +4,7 @@ metadata:
   name: aws-cli
   namespace: default
 spec:
-  serviceAccountName: test-irsa-s3-ddb
+  serviceAccountName: test-irsa-kazean-s3-ddb
   containers:
   - name: aws-cli
     image: amazon/aws-cli:latest
