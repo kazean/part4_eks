@@ -25,7 +25,7 @@
 > 2)persistence
 >> existingClaim: jenkins-pvc
 >> storageClass: gp2
->> accessMopde, size 
+>> accessMode, size 
 > 3)serviceAccount
 >> create, name
 
@@ -210,4 +210,4 @@
 > brew install argoproj/tap/kubectl-argo-rollouts
 > kubectl argo rollouts dashboard
 > >(확인) kubectl argo rollouts get rollout bubblepool -n bubblepool -w
-> >jenkins Build Now
+> >jenkins Build Now > argoCD Refresh

@@ -15,7 +15,7 @@ COPY view.html .
 COPY *.go ./
 
 # Build
-RUN go build -o /web-text-box
+RUN go build -o /test
 
 # To actually open the port, runtime parameters
 EXPOSE 8080

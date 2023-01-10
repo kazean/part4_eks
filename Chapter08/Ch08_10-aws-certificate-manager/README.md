@@ -9,3 +9,5 @@
 # deployment
 # ingress (test-ingress.yaml)
 - metadata annotations.alb.ingress.kubernetes.io/subnets, actions.ssl-redirect, certificate-arn, listen-ports
+5. Route53 도메인 등록 및 검증
+- 레코드 생성 > A Class > 별칭

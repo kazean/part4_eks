@@ -30,7 +30,7 @@ eksctl create iamserviceaccount \
 --cluster=<EKS Cluster명> \
 --namespace=kube-system \
 --name=aws-load-balancer-controller \
---attach-policy-arn=arn:aws:iam::<AWS 계정ID>:policy/AWSLoadBalancerControllerIAMPolicy \
+--attach-policy-arn=arn:aws:iam::939823608919:policy/test-alb-iam-policy \
 --override-existing-serviceaccounts \
 --approve
 OIDC Provider 접근가능 권한 < > eks cluster aws alb 생선관리권한
@@ -41,6 +41,7 @@ kubectl get sa -n kube-system (aws-load-balancer-controller)
 - alb controller 배포
 --cluster-name 설정
 cert-manager 먼저 배포해야 alb controller 배포가능
+> kubectl get all -n cert-manager
 > kubectl get po -n kube-system (aws-load-balancer-controller)
 > kubectl get deploy -n kube-system aws-load-balancer-controller
 

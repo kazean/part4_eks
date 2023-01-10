@@ -14,10 +14,14 @@
 - (~/container) docker build -t <AWS_ECR_REPO>:<TAG> .
 > <AWS_ECR>:1.0 .
 2. AWS ECR 로그인 
-- aws ecr get-login-password --region ap-north-east2 | docker login --username AWS --password-stdin <AWS_ECR_REPO>
+- aws ecr get-login-password --region ap-northeast-2 | docker login \ --username AWS --password-stdin 939823608919.dkr.ecr.ap-northeast-2.amazonaws.com/web-text-box
 3. AWS ECR로 빌드된 컨테이너 PUSH
 - docekr push <AWS_REPO>:<TAGH>
 # 2. go 언어 기반의 모듈로 Kubernetes Custom CLI 빋르 및 실행
+0. cdk8s
+- main.go 
+> k8s.NewKubeDeployment(chart, jsii.String("deployment"), &k8s.KubeDeploymentProps{
+>   ..Image: jsii.String("939823608919.dkr.ecr.ap-northeast-2.amazonaws.com/test:1.0"),
 1. go 언어 기반 모듈로 k8s build를 위한 Dependcy Import
 - cdk8s import
 2. go 언어 기반 모듈로 Kubernetes Cusotm CLI 빌드 및 실행

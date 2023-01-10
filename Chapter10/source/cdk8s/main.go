@@ -44,7 +44,7 @@ func NewMyChart(scope constructs.Construct, id string, props *MyChartProps) cdk8
 				Spec: &k8s.PodSpec{
 					Containers: &[]*k8s.Container{{
 						Name:  jsii.String("web-text-box"),
-						Image: jsii.String("<AWS ECR URL>/web-text-box:1.0"),
+						Image: jsii.String("939823608919.dkr.ecr.ap-northeast-2.amazonaws.com/web-text-box:1.0"),
 						Ports: &[]*k8s.ContainerPort{{ContainerPort: jsii.Number(8080)}},
 					}},
 				},
