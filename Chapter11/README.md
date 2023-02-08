@@ -44,6 +44,7 @@
 - values.yaml: ingress, persistence, serviceAccount
 4. 배포
 > helm install jenkins -n jenkins -f values.yaml jenkinsci/jenkins
+>> version: 3.10.3, k8s version: 1.21
 5. ing 정보 확인
 6. jenkins Route53 도메인 등록
 - DNS 관리 > 호스팅 영역 > <domain> > 레코드 생성 > jenkins, A 레코드, 별칭
